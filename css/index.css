@@ -1,0 +1,9 @@
+body{
+    font-family: "Calibri", Calibri, sans-serif;
+}
+
+#main-container{
+    width: 500px;
+    margin: 200px auto;
+    text-align: center;
+}
