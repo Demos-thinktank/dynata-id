@@ -19,8 +19,9 @@ function print_messages(role){
 }
 
 function set_subs_cookie(subsid){
-    let cookie_string = "subsid=" + subsid;
-    console.log(cookie_string);
+    let cookie_string = "max-age=60*60*24;" +
+        "subsid=" + subsid + ";" +
+        "samesite=strict;path=/";
     document.cookie = cookie_string;
     console.log(document.cookie);
 }
