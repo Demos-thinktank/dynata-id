@@ -12,14 +12,17 @@ function print_messages(role){
                 "<a href=\"https://www.demos.co.uk\">click here</a>";
             break;
         case 'success':
-            return_message = "Great! I love you. Your role is " + role;
+            return_message = "<p>Successfully connected to Dynata.</p> " +
+                "<p>You should be directed to Polis shortly. " +
+                "If this doesn't happen, " +
+                "<a href=\"https://pol.is/7dkr93h6ns\">click here.</a></p>";
             break;
     }
     return return_message;
 }
 
 function set_subs_cookie(subsid){
-    let cookie_string = "max-age=60*60*24;" +
+    let cookie_string = "max-age=86400;" +
         "subsid=" + subsid + ";" +
         "samesite=strict;path=/";
     document.cookie = cookie_string;
