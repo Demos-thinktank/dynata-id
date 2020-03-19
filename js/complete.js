@@ -19,14 +19,21 @@ function getCookie(name) {
     return null;
 }
 
+
+
 document.addEventListener('readystatechange', event => {
 //    if (event.target.readyState === "interactive") {   //same as:  ..addEventListener("DOMContentLoaded".. and   jQuery.ready
 //        alert("All HTML DOM elements are accessible");
 //   }
     if (event.target.readyState === "complete") {
-        let dyn_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
-            "brinebar?subsid=" + getCookie('subsid')
-        document.getElementById('backlink').setAttribute('href', dyn_link)
+        if (getCookie('subsid') === null) {
+            let complete_link="https://demos.co.uk";
+        }else{
+            let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
+            "brinebar?subsid=" + getCookie('subsid');
+        }
+
+        document.getElementById('backlink').setAttribute('href', complete_link)
     }
 });
 
