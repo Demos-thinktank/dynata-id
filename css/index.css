@@ -4,6 +4,25 @@ body{
 
 #main-container{
     width: 500px;
-    margin: 200px auto;
+    margin: 50px auto;
     text-align: center;
+}
+
+#polis-container{
+    display: none;
+}
+
+#button-holder{
+    width: 392px;
+    margin: 15px auto;
+}
+
+#voted{
+    padding: 10px;
+    font-size: 2em;
+}
+
+.orange{
+    background-color: #ee7155;
+    color: white;
 }

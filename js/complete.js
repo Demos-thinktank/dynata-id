@@ -35,4 +35,3 @@ document.addEventListener('readystatechange', event => {
         document.getElementById('backlink').setAttribute('href', complete_link)
     }
 });
-
