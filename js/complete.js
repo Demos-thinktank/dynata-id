@@ -24,7 +24,9 @@ document.addEventListener('readystatechange', event => {
 //        alert("All HTML DOM elements are accessible");
 //   }
     if (event.target.readyState === "complete") {
-        console.log(getCookie("subsid"));
+        let dyn_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
+            "brinebar?subsid=" + getCookie('subsid')
+        document.getElementById('backlink').setAttribute('href', dyn_link)
     }
 });
 
