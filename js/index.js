@@ -22,10 +22,10 @@ function print_messages(role){
 }
 
 function set_subs_cookie(subsid){
-    let cookie_string = "max-age=86400;" +
+    document.cookie = "" +
         "subsid=" + subsid + ";" +
+        "max-age=86400;" +
         "samesite=strict;path=/";
-    document.cookie = cookie_string;
     console.log(document.cookie);
 }
 
