@@ -26,10 +26,9 @@ document.addEventListener('readystatechange', event => {
 //        alert("All HTML DOM elements are accessible");
 //   }
     if (event.target.readyState === "complete") {
-        if (getCookie('subsid') === null) {
-            let complete_link="https://demos.co.uk";
-        }else{
-            let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
+        let complete_link = "http://demos.co.uk";
+        if (getCookie('subsid') !== null) {
+            complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
             "brinebar?subsid=" + getCookie('subsid');
         }
 
