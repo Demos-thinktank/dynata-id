@@ -1,2 +1,5 @@
 .DS_Store
+tests/urls.py
 .idea/
+*.log
+venv/

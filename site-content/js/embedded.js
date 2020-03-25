@@ -37,6 +37,7 @@ function set_subscriber(subsid) {
     }else{
         message.innerHTML = print_messages('success');
         document.getElementById('polis-container').style.display = 'block';
+        mouselisten(subsid);
     }
 }
 
@@ -47,7 +48,6 @@ document.addEventListener('readystatechange', event => {
     if (event.target.readyState === "complete") {
         let subsid = get_attribute('subsid');
         set_subscriber(subsid);
-        mouselisten(subsid);
     }
 });
 
@@ -58,7 +58,8 @@ function mouselisten(subsid) {
 
     window.addEventListener('blur',function(){
       if(myConfObj.iframeMouseOver){
-        show_button(subsid);
+          console.log("Click just happened");
+          show_button(subsid);
       }
     });
 
