@@ -37,9 +37,10 @@ function set_subscriber(subsid) {
     }else{
         message.innerHTML = print_messages('success');
         document.getElementById('polis-container').style.display = 'block';
-        mouselisten(subsid);
+        mouseListen(subsid, 'polis_3dzterdfcv');
     }
 }
+
 
 document.addEventListener('readystatechange', event => {
 //    if (event.target.readyState === "interactive") {   //same as:  ..addEventListener("DOMContentLoaded".. and   jQuery.ready
@@ -51,23 +52,14 @@ document.addEventListener('readystatechange', event => {
     }
 });
 
-function mouselisten(subsid) {
-    var myConfObj = {
-        iframeMouseOver : false
-    };
-
-    window.addEventListener('blur',function(){
-      if(myConfObj.iframeMouseOver){
-          console.log("Click just happened");
-          show_button(subsid);
-      }
-    });
-
-    document.getElementById('polis-container').addEventListener('mouseover',function(){
-       myConfObj.iframeMouseOver = true;
-    });
-    document.getElementById('polis-container').addEventListener('mouseout',function(){
-        myConfObj.iframeMouseOver = false;
+function mouseListen(subsid, polisId){
+    var eventListener = window.addEventListener('blur', function() {
+        if (document.activeElement === document.getElementById(polisId)) {
+            console.log("Click just happened");
+            show_button(subsid);
+            setTimeout(function(){ window.focus(); }, 0);
+        }
+        window.removeEventListener('blur', eventListener );
     });
 }
 
