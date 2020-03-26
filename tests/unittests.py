@@ -14,7 +14,8 @@ from urls import test_urls
 class UnitTest(unittest.TestCase):
 
     def setUp(self):
-        self.test_url = test_urls['staging']
+        #self.test_url = test_urls['staging']
+        self.test_url = test_urls['local']
         self.subsid = "4296"
         self.url_query = self.test_url + "?subsid=" + self.subsid
 
@@ -33,7 +34,7 @@ class UnitTest(unittest.TestCase):
         polis_container = self.driver.find_element_by_id(self.polis_iframe)
 
         self.driver.switch_to.frame(polis_container)
-        disagree_button = self.driver.find_element_by_id('disagreeButton')
+        disagree_button = self.driver.find_element_by_id('comment_form_textarea')
         disagree_button.click()
         self.driver.switch_to.default_content()
 
@@ -72,7 +73,7 @@ class UnitTest(unittest.TestCase):
             self.assertEqual(0, len(voted_button),
                              "Can see button on click " + str(i))
             self.click_within_poll()
-            print("That was click " + str(i))
+            print("That was click " + str(i+1))
 
         self.click_within_poll()
         voted_button = self.driver.find_elements_by_id('voted')
