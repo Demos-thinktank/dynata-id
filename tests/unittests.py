@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import unittest
+import time
 
 
 #A python dict held in a seperate file determining test URLS
@@ -13,7 +14,7 @@ from urls import test_urls
 class UnitTest(unittest.TestCase):
 
     def setUp(self):
-        self.test_url = test_urls['local']
+        self.test_url = test_urls['staging']
         self.subsid = "4296"
         self.url_query = self.test_url + "?subsid=" + self.subsid
 
@@ -54,6 +55,7 @@ class UnitTest(unittest.TestCase):
 
     def test_dynata_button_isnt_visible_until_iframe_clicked(self):
         self.driver.get(self.url_query)
+        time.sleep(5)
 
         voted_button = self.driver.find_elements_by_id('voted')
         self.assertEqual(0, len(voted_button), "Can see button but shouldn't")

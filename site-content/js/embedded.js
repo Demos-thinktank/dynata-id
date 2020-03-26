@@ -53,10 +53,15 @@ document.addEventListener('readystatechange', event => {
 });
 
 function mouseListen(subsid, polisId){
+    var userClicks = 0;
+
     var eventListener = window.addEventListener('blur', function() {
         if (document.activeElement === document.getElementById(polisId)) {
             console.log("Click just happened");
-            show_button(subsid);
+            userClicks += 1;
+            if (userClicks >= 10){
+                show_button(subsid);
+            }
             setTimeout(function(){ window.focus(); }, 0);
         }
         window.removeEventListener('blur', eventListener );
