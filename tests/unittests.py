@@ -54,16 +54,18 @@ class UnitTest(unittest.TestCase):
         polis_container = self.driver.find_element_by_id(self.polis_iframe)
         self.assertTrue(polis_container.is_displayed())
 
-    def test_dynata_button_isnt_visible_until_iframe_clicked_10_times(self):
+    def test_dynata_button_isnt_orange_until_iframe_clicked_10_times(self):
         self.driver.get(self.url_query)
 
         for i in range(9):
-            voted_button = self.driver.find_elements_by_id('voted')
-            self.assertEqual(0, len(voted_button),
-                             "Can see button on click " + str(i))
+            button = self.driver.find_element_by_id('voted')
+            colour = button.get_attribute("class")
+            message = "Button is lit up but shouldn't be."
+            self.assertEqual('grey', colour, message)
             self.click_within_poll()
             print("That was click " + str(i+1))
 
         self.click_within_poll()
-        voted_button = self.driver.find_elements_by_id('voted')
-        self.assertEqual(1, len(voted_button), "Can't see button but want to")
+        colour = self.driver.find_element_by_id('voted').get_attribute("class")
+        self.assertEqual('orange', colour, "Button should be lit up but isn't")
+

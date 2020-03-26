@@ -18,16 +18,12 @@ function print_messages(role){
     return return_message;
 }
 
-function show_button(subsid){
-    let button_holder = document.getElementById('button-holder')
+function activate_button(subsid){
+    let voted_button = document.getElementById('voted');
     let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
             "brinebar?subsid=" + subsid;
-    button_holder.innerHTML = "" +
-        "<a href=\"" + complete_link + "\">" +
-            "<button class=\"orange\" id=\"voted\" type=\"button\">" +
-                "I've voted on all statements" +
-            "</button>" +
-        "</a>"
+    voted_button.parentElement.setAttribute("href", complete_link);
+    voted_button.setAttribute("class", 'orange');
 }
 
 function set_subscriber(subsid) {
@@ -60,7 +56,7 @@ function mouseListen(subsid, polisId){
             console.log("Click just happened");
             userClicks += 1;
             if (userClicks >= 10){
-                show_button(subsid);
+                activate_button(subsid);
             }
             setTimeout(function(){ window.focus(); }, 0);
         }
