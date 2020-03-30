@@ -20,8 +20,12 @@ function print_messages(role){
 
 function activate_button(subsid) {
     let voted_button = document.getElementById('voted');
-    let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
-        "brinebar?subsid=" + subsid;
+
+    // DEMOS TESTING URL
+    //let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
+    //    "brinebar?subsid=" + subsid;
+    let complete_link = "https://demos.co.uk/people/alan-lockey/";
+
     let help_text = document.getElementById('help-note');
 
     voted_button.parentElement.setAttribute("href", complete_link);
@@ -43,7 +47,7 @@ function set_subscriber(subsid) {
     }else{
         message.innerHTML = print_messages('success');
         document.getElementById('polis-container').style.display = 'block';
-        mouseListen(subsid, 'polis_3dzterdfcv');
+        mouseListen(subsid, 'polis_7dkr93h6ns');
         show_button();
     }
 }
