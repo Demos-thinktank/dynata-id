@@ -64,6 +64,7 @@ document.addEventListener('readystatechange', event => {
 });
 
 function mouseListen(subsid, polisId){
+
     var userClicks = 0;
 
     var eventListener = window.addEventListener('blur', function() {
@@ -72,8 +73,9 @@ function mouseListen(subsid, polisId){
             userClicks += 1;
             if (userClicks >= 10){
                 activate_button(subsid);
+            } else {
+                setTimeout(function(){ window.focus(); }, 0);
             }
-            setTimeout(function(){ window.focus(); }, 0);
         }
         window.removeEventListener('blur', eventListener );
     });
