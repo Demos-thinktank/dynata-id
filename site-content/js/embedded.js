@@ -18,12 +18,22 @@ function print_messages(role){
     return return_message;
 }
 
-function activate_button(subsid){
+function activate_button(subsid) {
     let voted_button = document.getElementById('voted');
     let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
-            "brinebar?subsid=" + subsid;
+        "brinebar?subsid=" + subsid;
+    let help_text = document.getElementById('help-note');
+
     voted_button.parentElement.setAttribute("href", complete_link);
     voted_button.setAttribute("class", 'orange');
+    help_text.setAttribute('class', 'hidden');
+}
+
+function show_button(){
+    let voted_button = document.getElementById('voted');
+    let help_text = document.getElementById('help-note');
+    voted_button.setAttribute('class', 'grey');
+    help_text.removeAttribute('class');
 }
 
 function set_subscriber(subsid) {
@@ -34,6 +44,7 @@ function set_subscriber(subsid) {
         message.innerHTML = print_messages('success');
         document.getElementById('polis-container').style.display = 'block';
         mouseListen(subsid, 'polis_3dzterdfcv');
+        show_button();
     }
 }
 
