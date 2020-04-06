@@ -1,3 +1,5 @@
+const POLIS_ID='7dkr93h6ns';
+
 function get_attribute(name){
    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
       return decodeURIComponent(name[1]);
@@ -20,12 +22,8 @@ function print_messages(role){
 
 function activate_button(subsid) {
     let voted_button = document.getElementById('voted');
-
-    // DEMOS TESTING URL
-    //let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
-    //    "brinebar?subsid=" + subsid;
-    let complete_link = "https://demos.co.uk/people/alan-lockey/";
-
+    let complete_link = "http://survey.researchnow.co.uk/webprod/resources/" +
+        "PanelSample/subsidRedirectDecipher.php?SubsId=" + subsid;
     let help_text = document.getElementById('help-note');
 
     voted_button.parentElement.setAttribute("href", complete_link);
@@ -47,16 +45,13 @@ function set_subscriber(subsid) {
     }else{
         message.innerHTML = print_messages('success');
         document.getElementById('polis-container').style.display = 'block';
-        mouseListen(subsid, 'polis_7dkr93h6ns');
+        mouseListen(subsid, 'polis_' + POLIS_ID);
         show_button();
     }
 }
 
 
 document.addEventListener('readystatechange', event => {
-//    if (event.target.readyState === "interactive") {   //same as:  ..addEventListener("DOMContentLoaded".. and   jQuery.ready
-//        alert("All HTML DOM elements are accessible");
-//   }
     if (event.target.readyState === "complete") {
         let subsid = get_attribute('subsid');
         set_subscriber(subsid);
@@ -64,10 +59,8 @@ document.addEventListener('readystatechange', event => {
 });
 
 function mouseListen(subsid, polisId){
-
-    var userClicks = 0;
-
-    var eventListener = window.addEventListener('blur', function() {
+    let userClicks = 0;
+    let eventListener = window.addEventListener('blur', function() {
         if (document.activeElement === document.getElementById(polisId)) {
             console.log("Click just happened");
             userClicks += 1;
@@ -80,4 +73,3 @@ function mouseListen(subsid, polisId){
         window.removeEventListener('blur', eventListener );
     });
 }
-
