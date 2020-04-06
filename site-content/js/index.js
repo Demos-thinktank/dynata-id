@@ -12,42 +12,72 @@ function print_messages(role){
                 "<a href=\"https://www.demos.co.uk\">click here</a>";
             break;
         case 'success':
-            return_message = "<p>Successfully connected to Dynata.</p> " +
-                "<p>You should be directed to Polis shortly. " +
-                "If this doesn't happen, " +
-                "<a href=\"https://pol.is/7dkr93h6ns\">click here.</a></p>";
+            return_message=null;
             break;
     }
     return return_message;
 }
 
-function set_subs_cookie(subsid){
-    document.cookie = "" +
-        "subsid=" + subsid + ";" +
-        "max-age=86400;" +
-        "samesite=strict;path=/";
-    console.log(document.cookie);
+function activate_button(subsid) {
+    let voted_button = document.getElementById('voted');
+
+    // DEMOS TESTING URL
+    //let complete_link = "http://survey-d.dynata.com/survey/selfserve/53c/" +
+    //    "brinebar?subsid=" + subsid;
+    let complete_link = "https://demos.co.uk/people/alan-lockey/";
+
+    let help_text = document.getElementById('help-note');
+
+    voted_button.parentElement.setAttribute("href", complete_link);
+    voted_button.setAttribute("class", 'orange');
+    help_text.setAttribute('class', 'hidden');
 }
 
-function set_subscriber() {
-    var subsid = get_attribute('subsid');
-    var message = document.getElementById('message');
+function show_button(){
+    let voted_button = document.getElementById('voted');
+    let help_text = document.getElementById('help-note');
+    voted_button.setAttribute('class', 'grey');
+    help_text.removeAttribute('class');
+}
 
+function set_subscriber(subsid) {
+    let message = document.getElementById('message');
     if (typeof subsid === 'undefined'){
         message.innerHTML = print_messages('error');
     }else{
-        set_subs_cookie(subsid);
-        console.log(document.cookie);
         message.innerHTML = print_messages('success');
+        document.getElementById('polis-container').style.display = 'block';
+        mouseListen(subsid, 'polis_7dkr93h6ns');
+        show_button();
     }
 }
+
 
 document.addEventListener('readystatechange', event => {
 //    if (event.target.readyState === "interactive") {   //same as:  ..addEventListener("DOMContentLoaded".. and   jQuery.ready
 //        alert("All HTML DOM elements are accessible");
 //   }
     if (event.target.readyState === "complete") {
-        set_subscriber();
+        let subsid = get_attribute('subsid');
+        set_subscriber(subsid);
     }
 });
+
+function mouseListen(subsid, polisId){
+
+    var userClicks = 0;
+
+    var eventListener = window.addEventListener('blur', function() {
+        if (document.activeElement === document.getElementById(polisId)) {
+            console.log("Click just happened");
+            userClicks += 1;
+            if (userClicks >= 10){
+                activate_button(subsid);
+            } else {
+                setTimeout(function(){ window.focus(); }, 0);
+            }
+        }
+        window.removeEventListener('blur', eventListener );
+    });
+}
 
