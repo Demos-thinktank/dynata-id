@@ -1,11 +1,12 @@
 const POLIS_ID='7dkr93h6ns';
+const POLIS_SERVER='https://pol.is';
 
 function get_attribute(name){
    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
       return decodeURIComponent(name[1]);
 }
 
-function print_messages(role){
+function print_messages(role, subsid){
     let return_message;
     switch (role) {
         case 'error':
@@ -15,9 +16,26 @@ function print_messages(role){
             break;
         case 'success':
             return_message=null;
+            print_container(subsid);
             break;
     }
     return return_message;
+}
+
+function print_container(subsid){
+    let polis_container = document.getElementById('polis-container');
+    let pol_html =
+        "<div class='polis' " +
+            "data-conversation_id='" + POLIS_ID + "' " +
+            "data-xid='" + subsid + "'" + "></div>";
+
+    let embedScript = document.createElement("script");
+    embedScript.src = POLIS_SERVER + "/embed.js";
+    embedScript.type = 'text/javascript';
+    embedScript.async = true;
+
+    polis_container.innerHTML = pol_html;
+    polis_container.appendChild(embedScript);
 }
 
 function activate_button(subsid) {
@@ -39,11 +57,12 @@ function show_button(){
 }
 
 function set_subscriber(subsid) {
+    // Handles the initial handshake between server and iframe
     let message = document.getElementById('message');
     if (typeof subsid === 'undefined'){
         message.innerHTML = print_messages('error');
     }else{
-        message.innerHTML = print_messages('success');
+        message.innerHTML = print_messages('success', subsid);
         document.getElementById('polis-container').style.display = 'block';
         mouseListen(subsid, 'polis_' + POLIS_ID);
         show_button();

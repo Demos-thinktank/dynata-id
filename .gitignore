@@ -3,3 +3,4 @@ tests/urls.py
 .idea/
 *.log
 venv/
+site-content/test-*
