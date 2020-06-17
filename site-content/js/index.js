@@ -1,4 +1,4 @@
-const POLIS_ID='7dkr93h6ns';
+const POLIS_ID='72mvnrmbru';
 const POLIS_SERVER='https://pol.is';
 
 function get_attribute(name){
