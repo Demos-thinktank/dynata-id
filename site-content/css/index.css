@@ -45,11 +45,12 @@ button{
     font-style: italic;
 }
 
-#privacy{
+#privacy, #support{
     text-align: center;
+    color: #9e9e9e;
 }
 
-#privacy a{
+#privacy a, #support a{
     text-decoration: none;
     color: #9e9e9e;
 }
