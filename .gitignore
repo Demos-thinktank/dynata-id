@@ -4,3 +4,4 @@ tests/urls.py
 *.log
 venv/
 site-content/test-*
+access-logs/
