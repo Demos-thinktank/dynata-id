@@ -1,5 +1,6 @@
-const POLIS_ID='5f5bdnv6tr';
+const POLIS_ID='8sxraa3wp5';
 const POLIS_SERVER='https://pol.is';
+const LOG_LEVEL='silent'; // Change from 'silent' for logging
 
 function get_attribute(name){
    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
@@ -29,6 +30,9 @@ function print_container(subsid){
             "data-conversation_id='" + POLIS_ID + "' " +
             "data-xid='" + subsid + "'" + "></div>";
 
+    // We were going to do this by embedding a <script> element
+    // but this did not work for async reasons and so we have to append
+    // attributes to the 'script' element defined in the HTML
     let embedScript = document.createElement("script");
     embedScript.src = POLIS_SERVER + "/embed.js";
     embedScript.type = 'text/javascript';
@@ -40,6 +44,7 @@ function print_container(subsid){
 
 function activate_button(subsid) {
     let voted_button = document.getElementById('voted');
+    // IF STUFF BREAKS LOOK HERE
     let complete_link = "http://survey.researchnow.co.uk/webprod/resources/" +
         "PanelSample/subsidRedirectDecipher.php?SubsId=" + subsid;
     let help_text = document.getElementById('help-note');
@@ -69,7 +74,6 @@ function set_subscriber(subsid) {
     }
 }
 
-
 document.addEventListener('readystatechange', event => {
     if (event.target.readyState === "complete") {
         let subsid = get_attribute('subsid');
@@ -81,7 +85,9 @@ function mouseListen(subsid, polisId){
     let userClicks = 0;
     let eventListener = window.addEventListener('blur', function() {
         if (document.activeElement === document.getElementById(polisId)) {
-            console.log("Click just happened");
+            if (LOG_LEVEL !== 'silent'){
+                console.log("Click just happened");
+            }
             userClicks += 1;
             if (userClicks >= 10){
                 activate_button(subsid);
